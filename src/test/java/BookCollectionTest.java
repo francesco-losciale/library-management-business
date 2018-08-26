@@ -7,7 +7,10 @@ public class BookCollectionTest {
 
     @Test
     public void testCollectBooksTogether() {
-        String book = "test";
+        Book book = new Book();
+        book.setTitle("test");
+        book.setAuthor("test");
+        book.setIsbn("test");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
         assertTrue(bookCollection.contains(book));
@@ -16,10 +19,26 @@ public class BookCollectionTest {
 
     @Test
     public void testSeekBookInCollection() {
-        String book = "test";
+        Book book = new Book();
+        book.setTitle("test");
+        book.setAuthor("test");
+        book.setIsbn("test");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
-        String result = bookCollection.seek(book);
+        Book result = bookCollection.seek(book);
+        assertEquals(result, book);
+    }
+
+    @Test
+    public void testSeekBookInCollections() {
+        Book book = new Book();
+        book.setTitle("test");
+        book.setAuthor("test");
+        book.setIsbn("test");
+        BookCollection bookCollection1 = new BookCollection();
+        BookCollection bookCollection2 = new BookCollection();
+        bookCollection1.add(book);
+        Book result = BookCollection.seek(book, bookCollection1, bookCollection2);
         assertEquals(result, book);
     }
 
