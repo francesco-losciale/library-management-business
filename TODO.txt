@@ -1,0 +1,10 @@
+Collect some books together
+Seek a particular book in a collection
+Seek a particular book over more collections
+Move a book to a different collection
+Add some new book/s to a collection
+Make a book out of order
+Make a book available again
+Place collections into shelves
+Move collections through shelves
+Collect shelves as Area or Genre
