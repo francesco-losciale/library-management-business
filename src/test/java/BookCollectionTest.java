@@ -67,4 +67,16 @@ public class BookCollectionTest {
         Order.setBookAsOutOfOrder(book);
         assertTrue(book.isOutOfOrder());
     }
+
+    @Test
+    public void testMakeBookAvailable() {
+        Book book = new Book();
+        book.setTitle("test");
+        book.setAuthor("test");
+        book.setIsbn("test");
+        BookCollection bookCollection = new BookCollection();
+        bookCollection.add(book);
+        Order.setBookAvailable(book);
+        assertFalse(book.isOutOfOrder());
+    }
 }
