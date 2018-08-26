@@ -1,6 +1,7 @@
-Collect some books together
+HEAD:
 Seek a particular book in a collection
 Seek a particular book over more collections
+Add more information about a book
 Move a book to a different collection
 Add some new book/s to a collection
 Make a book out of order
@@ -8,3 +9,8 @@ Make a book available again
 Place collections into shelves
 Move collections through shelves
 Collect shelves as Area or Genre
+
+
+
+DONE:
+Collect some books together
