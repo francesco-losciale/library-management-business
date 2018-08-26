@@ -6,7 +6,7 @@ public class Register {
     final private Map<Object, Book> register;
 
     public Register() {
-        register = new HashMap<Object, Book>();
+        register = new HashMap<>();
     }
 
     public void add(Book book) {
@@ -29,4 +29,7 @@ public class Register {
         }
     }
 
+    public void clean() {
+        register.clear();
+    }
 }
