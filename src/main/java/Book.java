@@ -34,7 +34,7 @@ public class Book {
         return isOutOfOrder;
     }
 
-    public void setOutOfOrder(boolean outOfOrder) {
+    void setOutOfOrder(boolean outOfOrder) {
         isOutOfOrder = outOfOrder;
     }
 }

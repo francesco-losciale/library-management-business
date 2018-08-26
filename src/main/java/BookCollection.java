@@ -40,8 +40,4 @@ public class BookCollection {
         return null;
     }
 
-    public static void setOutOfOrder(Book book) {
-        book.setOutOfOrder(true);
-    }
-
 }
