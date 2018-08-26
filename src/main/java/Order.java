@@ -4,4 +4,7 @@ public class Order {
         book.setOutOfOrder(true);
     }
 
+    public static void setBookAvailable(Book book) {
+        book.setOutOfOrder(false);
+    }
 }
