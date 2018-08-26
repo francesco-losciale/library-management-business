@@ -5,6 +5,6 @@ public class Order {
     }
 
     public static void setBookAvailable(Book book) {
-        book.addCopy();
+        book.addAvailability();
     }
 }

@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,12 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BookCollectionTest {
 
+    final static Register register = new Register();
+
+    @BeforeAll
+    public static void init() {
+        Book book = new Book();
+        book.setTitle("title");
+        book.setAuthor("author");
+        book.setIsbn("isbn");
+        register.add(book);
+    }
+
     @Test
     public void testCollectBooksTogether() {
-        Book book = new Book();
-        book.setTitle("test");
-        book.setAuthor("test");
-        book.setIsbn("test");
+        Book book = register.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
         assertTrue(bookCollection.contains(book));
@@ -19,10 +28,7 @@ public class BookCollectionTest {
 
     @Test
     public void testSeekBookInCollection() {
-        Book book = new Book();
-        book.setTitle("test");
-        book.setAuthor("test");
-        book.setIsbn("test");
+        Book book = register.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
         Book result = bookCollection.seek(book);
@@ -31,10 +37,7 @@ public class BookCollectionTest {
 
     @Test
     public void testSeekBookInCollections() {
-        Book book = new Book();
-        book.setTitle("test");
-        book.setAuthor("test");
-        book.setIsbn("test");
+        Book book = register.get("isbn");
         BookCollection bookCollection1 = new BookCollection();
         BookCollection bookCollection2 = new BookCollection();
         bookCollection1.add(book);
@@ -44,10 +47,7 @@ public class BookCollectionTest {
 
     @Test
     public void testMoveBookToDifferentCollection() {
-        Book book = new Book();
-        book.setTitle("test");
-        book.setAuthor("test");
-        book.setIsbn("test");
+        Book book = register.get("isbn");
         BookCollection bookCollection1 = new BookCollection();
         bookCollection1.add(book);
         BookCollection bookCollection2 = new BookCollection();
@@ -58,10 +58,7 @@ public class BookCollectionTest {
 
     @Test
     public void testMakeBookOutOfOrder() {
-        Book book = new Book();
-        book.setTitle("test");
-        book.setAuthor("test");
-        book.setIsbn("test");
+        Book book = register.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
         Order.setBookAsOutOfOrder(book);
@@ -70,10 +67,7 @@ public class BookCollectionTest {
 
     @Test
     public void testMakeBookAvailable() {
-        Book book = new Book();
-        book.setTitle("test");
-        book.setAuthor("test");
-        book.setIsbn("test");
+        Book book = register.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
         Order.setBookAvailable(book);

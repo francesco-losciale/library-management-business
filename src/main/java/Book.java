@@ -3,8 +3,11 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
-
     private int availability;
+
+    public Object getId() {
+        return getIsbn();
+    }
 
     public String getTitle() {
         return title;
@@ -38,7 +41,11 @@ public class Book {
         availability = 0;
     }
 
-    public void addCopy() {
+    public void addAvailability() {
         availability += 1;
+    }
+
+    public void addAvailability(int availability) {
+        this.availability += availability;
     }
 }
