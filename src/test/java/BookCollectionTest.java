@@ -11,6 +11,7 @@ public class BookCollectionTest {
     public void testCollectBooksTogheter() {
         String book = "test";
         List<String> collection = new ArrayList<String>();
+        collection.add(book);
         assertTrue(collection.contains(book));
     }
 
