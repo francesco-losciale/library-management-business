@@ -4,7 +4,7 @@ public class Book {
     private String author;
     private String isbn;
 
-    private boolean isOutOfOrder;
+    private int availability;
 
     public String getTitle() {
         return title;
@@ -31,10 +31,14 @@ public class Book {
     }
 
     public boolean isOutOfOrder() {
-        return isOutOfOrder;
+        return availability == 0;
     }
 
-    void setOutOfOrder(boolean outOfOrder) {
-        isOutOfOrder = outOfOrder;
+    void setOutOfOrder() {
+        availability = 0;
+    }
+
+    public void addCopy() {
+        availability += 1;
     }
 }

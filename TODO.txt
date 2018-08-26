@@ -1,5 +1,4 @@
 HEAD:
-Make a book available again
 Place collections into shelves
 Move collections through shelves
 Collect shelves as Area or Genre
@@ -14,3 +13,4 @@ Add more information about a book
 Add some new book/s to a collection
 Move a book to a different collection
 Make a book out of order
+Make a book available again
