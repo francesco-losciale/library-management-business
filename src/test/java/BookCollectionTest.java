@@ -64,7 +64,7 @@ public class BookCollectionTest {
         book.setIsbn("test");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
-        bookCollection.outOfOrder(book);
+        BookCollection.setOutOfOrder(book);
         assertTrue(book.isOutOfOrder());
     }
 }

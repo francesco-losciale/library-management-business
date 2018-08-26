@@ -4,6 +4,8 @@ public class Book {
     private String author;
     private String isbn;
 
+    private boolean isOutOfOrder;
+
     public String getTitle() {
         return title;
     }
@@ -26,5 +28,13 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public boolean isOutOfOrder() {
+        return isOutOfOrder;
+    }
+
+    public void setOutOfOrder(boolean outOfOrder) {
+        isOutOfOrder = outOfOrder;
     }
 }
