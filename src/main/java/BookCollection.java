@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class BookCollection {
 
@@ -11,6 +12,10 @@ public class BookCollection {
 
     public boolean contains(Book book) {
         return collection.contains(book);
+    }
+
+    public Stream<Book> stream() {
+        return collection.stream();
     }
 
     public Book seek(Book book) {

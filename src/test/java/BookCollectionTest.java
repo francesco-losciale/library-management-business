@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -72,5 +75,21 @@ public class BookCollectionTest {
         bookCollection.add(book);
         Order.setBookAvailable(book);
         assertFalse(book.isOutOfOrder());
+    }
+
+    @Test
+    public void testPlaceCollectionIntoShelf() {
+        Book book = register.get("isbn");
+        BookCollection bookCollection = new BookCollection();
+        bookCollection.add(book);
+        BookShelf bookShelf = new BookShelf(10);
+        bookShelf.place(bookCollection);
+        List<Book> notFoundBookList = new ArrayList<>();
+        bookCollection.stream().forEach(currentBook -> {
+            if (!bookShelf.contains(currentBook)) {
+                notFoundBookList.add(currentBook);
+            }
+        });
+        assertTrue(notFoundBookList.isEmpty());
     }
 }
