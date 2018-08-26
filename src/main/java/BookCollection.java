@@ -12,4 +12,13 @@ public class BookCollection {
     public boolean contains(String book) {
         return collection.contains(book);
     }
+
+    public String seek(String book) {
+        for (String currentBook : collection) {
+            if (currentBook.equals(book)) {
+                return book;
+            }
+        }
+        return null;
+    }
 }
