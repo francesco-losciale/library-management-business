@@ -1,6 +1,9 @@
 package com.frank.book;
 
-public class Availability {
+/**
+ * Availability of an item in terms of number of copies
+ */
+class Availability {
 
     private int availability;
 
