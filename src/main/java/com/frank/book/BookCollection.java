@@ -8,6 +8,8 @@ class BookCollection {
 
     private List<Book> collection = new ArrayList<Book>();
 
+    private boolean ordered;
+
     public void add(Book book) {
         collection.add(book);
     }
@@ -47,4 +49,11 @@ class BookCollection {
         return null;
     }
 
+    public boolean isOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(boolean ordered) {
+        this.ordered = ordered;
+    }
 }

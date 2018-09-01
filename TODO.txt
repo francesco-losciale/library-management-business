@@ -1,7 +1,4 @@
 HEAD:
-Collect shelves as Area or Genre
-Place an order for a book
-Place an order for a collection of books
 Calculate the price of the order
 Delete an order
 Delete an order if not already shipped
@@ -19,3 +16,5 @@ Make a book out of order
 Make a book available again
 Place collections into shelves
 Move collections through shelves
+Collect shelves as Area or Genre
+Place an order for a collection of books

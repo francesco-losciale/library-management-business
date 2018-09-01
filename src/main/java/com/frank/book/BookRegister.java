@@ -7,7 +7,7 @@ public class BookRegister {
 
     final private Map<Object, Book> register;
 
-    final private Map<Book, Availability> availability;
+    final private Map<Book, BookAvailability> availability;
 
     public BookRegister() {
         register = new HashMap<>();
@@ -15,7 +15,7 @@ public class BookRegister {
     }
 
     public void add(Book item) {
-        availability.put(item, Availability.ONE);
+        availability.put(item, BookAvailability.ONE);
         register(item);
     }
 
@@ -24,14 +24,14 @@ public class BookRegister {
     }
 
     public void setBookAsOutOfOrder(Book item) {
-        this.availability.put(item, Availability.ZERO);
+        this.availability.put(item, BookAvailability.ZERO);
     }
 
     public void setBookAvailable(Book item) {
         if (this.availability.containsKey(item)) {
             this.availability.get(item).increase();
         } else {
-            this.availability.put(item, Availability.ONE);
+            this.availability.put(item, BookAvailability.ONE);
         }
     }
 

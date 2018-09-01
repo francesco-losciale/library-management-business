@@ -1,9 +1,5 @@
 package com.frank.book;
 
-import com.frank.book.Book;
-import com.frank.book.BookCollection;
-import com.frank.book.BookRegister;
-import com.frank.book.BookShelf;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 
-public class BookCollectionTest {
+public class BookRegisterTest {
 
     final BookRegister bookRegister = new BookRegister();
 
@@ -116,5 +112,17 @@ public class BookCollectionTest {
         bookShelfSrc.place(bookCollection);
         bookShelfSrc.move(bookCollection, bookShelfDest);
         assertTrue(bookShelfDest.contains(bookCollection));
+    }
+
+    @Test
+    public void testAssignGenreToShelves() {
+        final BookGenre genre = new BookGenre();
+        genre.setName("thriller");
+        Book book = bookRegister.get("isbn");
+        BookCollection collection = new BookCollection();
+        collection.add(book);
+        BookShelf thrillerShelf = new BookShelf(1, genre);
+        thrillerShelf.place(collection);
+        assertTrue(collection.stream().allMatch((currentBook) -> currentBook.getGenre().equals(genre)));
     }
 }
