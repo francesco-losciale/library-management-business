@@ -9,16 +9,27 @@ class BookShelf {
 
     final private int bookPlaceCount;
 
+    private BookGenre genre;
+
     public BookShelf(int bookPlaceCount) {
         this.bookPlaceCount = bookPlaceCount;
         this.bookInShelf = new ArrayList<>(bookPlaceCount);
+    }
+
+    public BookShelf(int bookPlaceCount, BookGenre genre) {
+        this.bookPlaceCount = bookPlaceCount;
+        this.bookInShelf = new ArrayList<>(bookPlaceCount);
+        this.genre = genre;
     }
 
     public void place(BookCollection bookCollection) {
         if (bookPlaceCount - bookInShelf.size() < 0) {
             throw new RuntimeException("No space in shelf " + this + " to store the collection " + bookCollection);
         }
-        bookCollection.stream().forEach( book -> bookInShelf.add(book));
+        bookCollection.stream().forEach( book -> {
+            bookInShelf.add(book);
+            book.setGenre(this.genre);
+        });
     }
 
     public boolean contains(Book book) {

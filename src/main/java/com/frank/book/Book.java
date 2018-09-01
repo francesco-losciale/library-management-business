@@ -5,6 +5,7 @@ class Book {
     private String title;
     private String author;
     private String isbn;
+    private BookGenre genre;
 
     public Object getId() {
         return getIsbn();
@@ -34,4 +35,11 @@ class Book {
         this.isbn = isbn;
     }
 
+    public BookGenre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(BookGenre genre) {
+        this.genre = genre;
+    }
 }
