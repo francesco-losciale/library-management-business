@@ -1,7 +1,9 @@
+package com.frank.book;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookShelf {
+class BookShelf {
 
     final private List<Book> bookInShelf;
 
@@ -21,5 +23,20 @@ public class BookShelf {
 
     public boolean contains(Book book) {
         return bookInShelf.contains(book);
+    }
+
+    public boolean contains(BookCollection bookCollection) {
+        return bookCollection.stream().allMatch((book) -> bookInShelf.contains(book) );
+    }
+
+    public void move(BookCollection bookCollection, BookShelf bookShelfDest) {
+        bookCollection.stream().forEach((book) -> {
+            this.bookInShelf.remove(book.getId());
+            bookShelfDest.place(book);
+        });
+    }
+
+    private void place(Book book) {
+        this.bookInShelf.add(book);
     }
 }

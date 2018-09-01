@@ -1,8 +1,10 @@
+package com.frank.book;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class BookCollection {
+class BookCollection {
 
     private List<Book> collection = new ArrayList<Book>();
 

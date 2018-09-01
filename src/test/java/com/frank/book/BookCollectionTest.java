@@ -1,3 +1,9 @@
+package com.frank.book;
+
+import com.frank.book.Book;
+import com.frank.book.BookCollection;
+import com.frank.book.BookRegister;
+import com.frank.book.BookShelf;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 
 public class BookCollectionTest {
 
-    final Register register = new Register();
+    final BookRegister bookRegister = new BookRegister();
 
     @Before
     public void init() {
@@ -20,17 +26,17 @@ public class BookCollectionTest {
         book.setTitle("title");
         book.setAuthor("author");
         book.setIsbn("isbn");
-        register.add(book);
+        bookRegister.add(book);
     }
 
     @After
     public void end() {
-        register.clean();
+        bookRegister.clean();
     }
 
     @Test
     public void testCollectBooksTogether() {
-        Book book = register.get("isbn");
+        Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
         assertTrue(bookCollection.contains(book));
@@ -38,7 +44,7 @@ public class BookCollectionTest {
 
     @Test
     public void testSeekBookInCollection() {
-        Book book = register.get("isbn");
+        Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
         Book result = bookCollection.seek(book);
@@ -47,7 +53,7 @@ public class BookCollectionTest {
 
     @Test
     public void testSeekBookInCollections() {
-        Book book = register.get("isbn");
+        Book book = bookRegister.get("isbn");
         BookCollection bookCollection1 = new BookCollection();
         BookCollection bookCollection2 = new BookCollection();
         bookCollection1.add(book);
@@ -57,7 +63,7 @@ public class BookCollectionTest {
 
     @Test
     public void testMoveBookToDifferentCollection() {
-        Book book = register.get("isbn");
+        Book book = bookRegister.get("isbn");
         BookCollection bookCollection1 = new BookCollection();
         bookCollection1.add(book);
         BookCollection bookCollection2 = new BookCollection();
@@ -68,25 +74,25 @@ public class BookCollectionTest {
 
     @Test
     public void testMakeBookOutOfOrder() {
-        Book book = register.get("isbn");
+        Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
-        Order.setBookAsOutOfOrder(book);
-        assertTrue(book.isOutOfOrder());
+        bookRegister.setBookAsOutOfOrder(book);
+        assertFalse(bookRegister.isBookAvailable(book));
     }
 
     @Test
     public void testMakeBookAvailable() {
-        Book book = register.get("isbn");
+        Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
-        Order.setBookAvailable(book);
-        assertFalse(book.isOutOfOrder());
+        bookRegister.setBookAvailable(book);
+        assertTrue(bookRegister.isBookAvailable(book));
     }
 
     @Test
     public void testPlaceCollectionIntoShelf() {
-        Book book = register.get("isbn");
+        Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
         BookShelf bookShelf = new BookShelf(10);
@@ -98,5 +104,17 @@ public class BookCollectionTest {
             }
         });
         assertTrue(notFoundBookList.isEmpty());
+    }
+
+    @Test
+    public void testMoveCollectionThroughShelves() {
+        Book book = bookRegister.get("isbn");
+        BookCollection bookCollection = new BookCollection();
+        bookCollection.add(book);
+        BookShelf bookShelfSrc = new BookShelf(1);
+        BookShelf bookShelfDest = new BookShelf(1);
+        bookShelfSrc.place(bookCollection);
+        bookShelfSrc.move(bookCollection, bookShelfDest);
+        assertTrue(bookShelfDest.contains(bookCollection));
     }
 }

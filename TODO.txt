@@ -1,5 +1,4 @@
 HEAD:
-Move collections through shelves
 Collect shelves as Area or Genre
 Place an order for a book
 Place an order for a collection of books
@@ -19,3 +18,4 @@ Move a book to a different collection
 Make a book out of order
 Make a book available again
 Place collections into shelves
+Move collections through shelves
