@@ -1,4 +1,6 @@
-package com.frank.shipment;
+package com.frank.shipment.strategies.impl;
+
+import com.frank.shipment.strategies.PossibleDateCalculatorStrategy;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

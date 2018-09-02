@@ -1,8 +1,8 @@
-package com.frank.shipment;
+package com.frank.shipment.strategies;
 
 import java.time.LocalDate;
 
 public interface BestDateForShipmentStrategy {
 
-    public LocalDate calculate();
+    LocalDate calculate();
 }

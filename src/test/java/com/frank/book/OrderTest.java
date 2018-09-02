@@ -1,6 +1,10 @@
 package com.frank.book;
 
 import com.frank.shipment.*;
+import com.frank.shipment.strategies.BestCourierForShipmentStrategy;
+import com.frank.shipment.strategies.BestDateForShipmentStrategy;
+import com.frank.shipment.strategies.impl.SimpleBestCourierForShipmentStrategy;
+import com.frank.shipment.strategies.impl.SimpleBestDateForShipmentStrategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

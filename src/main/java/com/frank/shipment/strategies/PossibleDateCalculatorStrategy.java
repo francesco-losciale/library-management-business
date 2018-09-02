@@ -1,9 +1,9 @@
-package com.frank.shipment;
+package com.frank.shipment.strategies;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface PossibleDateCalculatorStrategy {
 
-    public List<LocalDate> calculate();
+    List<LocalDate> calculate();
 }
