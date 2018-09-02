@@ -1,17 +1,13 @@
 package com.frank.book;
 
-import com.frank.shipment.BestDateForShipmentStrategy;
-import com.frank.shipment.Courier;
-import com.frank.shipment.SimpleBestDateForShipmentStrategy;
+import com.frank.shipment.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -69,7 +65,7 @@ public class OrderTest {
     public void testReadWhatAreAllTheVacantDaysForACourierThenPickTheNearestOne() {
         Order order = new Order();
         Courier courier = new Courier();
-        courier.calculatePossibeDates(order);
+        courier.calculatePossibleDates(order);
         List<LocalDate> dateList = courier.getCalculatedPossibleDates();
         LocalDate date = dateList.get(0);
         final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
@@ -101,7 +97,21 @@ public class OrderTest {
         List<LocalDate> dateList = new ArrayList<>();
         dateList.addAll(firstCourierDateList);
         dateList.addAll(secondCourierDateList);
-        final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
+        final Optional<LocalDate> min = dateList.stream().min(LocalDate::compareTo);
         assertEquals(min.get(), bestDate);
     }
+
+    @Test
+    public void testReadWhatAreAllTheVacantDaysFromCouriersThenPickTheCourierThatOffersTheNearestOne() {
+        Order order = new Order();
+        Courier firstCourier = new Courier();
+        Courier secondCourier = new Courier();
+        BestCourierForShipmentStrategy strategy = new SimpleBestCourierForShipmentStrategy(order, firstCourier, secondCourier);
+        Courier calculatedCourier = strategy.calculate();
+        LocalDate firstCourierDate = firstCourier.getCalculatedPossibleDates().stream().min(LocalDate::compareTo).get();
+        LocalDate secondCourierDate = secondCourier.getCalculatedPossibleDates().stream().min(LocalDate::compareTo).get();
+        Courier bestCourier = firstCourierDate.isBefore(secondCourierDate) ? firstCourier : secondCourier;
+        assertEquals(bestCourier, calculatedCourier);
+    }
+
 }

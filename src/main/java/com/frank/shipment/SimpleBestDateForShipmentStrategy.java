@@ -22,9 +22,9 @@ public class SimpleBestDateForShipmentStrategy implements BestDateForShipmentStr
     public LocalDate calculate() {
         List<LocalDate> allDates = new ArrayList<>();
         couriers.parallelStream().forEach((courier -> {
-            courier.calculatePossibeDates(order);
+            courier.calculatePossibleDates(order);
             allDates.addAll(courier.getCalculatedPossibleDates());
         }));
-        return allDates.stream().min((o1, o2) -> o1.compareTo(o2)).get();
+        return allDates.stream().min(LocalDate::compareTo).get();
     }
 }

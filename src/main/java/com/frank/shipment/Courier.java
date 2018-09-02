@@ -17,7 +17,7 @@ public class Courier {
         order.addAsContacted(this);
     }
 
-    public void calculatePossibeDates(Order order) {
+    public void calculatePossibleDates(Order order) {
         // On the basis of the order data or some internal Courier states,
         // choose the best strategy to calculate the possible dates
         PossibleDateCalculatorStrategy possibleDateCalculatorStrategy = new RandomPossibleDateCalculatorStrategy();
