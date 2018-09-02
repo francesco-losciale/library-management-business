@@ -1,11 +1,14 @@
 package com.frank.book;
 
+import java.math.BigDecimal;
+
 class Book {
 
     private String title;
     private String author;
     private String isbn;
     private BookGenre genre;
+    private BigDecimal actualPrice;
 
     public Object getId() {
         return getIsbn();
@@ -41,5 +44,13 @@ class Book {
 
     public void setGenre(BookGenre genre) {
         this.genre = genre;
+    }
+
+    public BigDecimal getActualPrice() {
+        return actualPrice;
+    }
+
+    public void setActualPrice(BigDecimal actualPrice) {
+        this.actualPrice = actualPrice;
     }
 }

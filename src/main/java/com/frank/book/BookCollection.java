@@ -1,6 +1,7 @@
 package com.frank.book;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -9,6 +10,14 @@ class BookCollection {
     private List<Book> collection = new ArrayList<Book>();
 
     private boolean ordered;
+
+    public BookCollection(){
+
+    }
+
+    public BookCollection(Book... collection){
+        Arrays.stream(collection).forEach((book) -> this.collection.add(book));
+    }
 
     public void add(Book book) {
         collection.add(book);
