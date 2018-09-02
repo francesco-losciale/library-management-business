@@ -1,5 +1,4 @@
 HEAD:
-Contact a courier for a particular Order
 Read what are the vacancies offered by the courier and pick the nearest by date
 Contact more than one courier for a particular Order
 Read what are the vacancies offered by all the couriers and pick the nearest by date
@@ -23,3 +22,4 @@ Move collections through shelves
 Collect shelves as Genre
 Place an order for a collection of books
 Calculate the price of the order
+Contact a courier for a particular Order

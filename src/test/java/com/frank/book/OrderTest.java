@@ -1,5 +1,6 @@
 package com.frank.book;
 
+import com.frank.shipment.Courier;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,5 +48,13 @@ public class OrderTest {
         Order order = new Order();
         order.add(bookCollection);
         assertEquals(order.getBooksPrice().doubleValue(), book1.getActualPrice().add(book2.getActualPrice()).add(book3.getActualPrice()).doubleValue());
+    }
+
+    @Test
+    public void testContactCourierSendingOrderInformation() {
+        Order order = new Order();
+        Courier courier = new Courier();
+        courier.receive(order);
+        assertEquals(order.getOrderStatus(), Order.OrderStatus.RECEIVED_BY_THE_COURIER);
     }
 }
