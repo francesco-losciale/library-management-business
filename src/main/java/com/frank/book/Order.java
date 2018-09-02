@@ -8,14 +8,9 @@ import java.util.List;
 
 public class Order {
 
-    public enum OrderStatus {
-        INITIALIZED,
-        RECEIVED_BY_THE_COURIER,
-    }
+    private OrderState orderState = new OrderState();
 
     private Courier courierInCharge;
-
-    private OrderStatus orderStatus;
 
     private List<Book> bookList = new ArrayList<>();
 
@@ -33,12 +28,13 @@ public class Order {
         return booksPrice;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
     public void setAsReceived(Courier courier) {
-        this.orderStatus = OrderStatus.RECEIVED_BY_THE_COURIER;
+        this.orderState.received();
         this.courierInCharge = courier;
     }
+
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
 }
