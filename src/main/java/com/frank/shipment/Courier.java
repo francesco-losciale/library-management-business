@@ -18,13 +18,10 @@ public class Courier {
     }
 
     public List<LocalDate> getPossibleDates(Order order) {
-        List<LocalDate> dateList = calculatePossibleDates(order);
-        return dateList;
+        // On the basis of the order data or some internal Courier states,
+        // choose the best strategy to calculate the possible dates
+        PossibleDateCalculatorStrategy possibleDateCalculatorStrategy = new SimplePossibleDateCalculatorStrategy();
+        return possibleDateCalculatorStrategy.calculate();
     }
 
-    private List<LocalDate> calculatePossibleDates(Order order) {
-        List<LocalDate> listDate = new ArrayList<>();
-        listDate.add(LocalDate.now());
-        return listDate;
-    }
 }
