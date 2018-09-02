@@ -96,9 +96,9 @@ public class OrderTest {
         List<LocalDate> dateList = new ArrayList<>();
         dateList.addAll(firstCourierDateList);
         dateList.addAll(secondCourierDateList);
-        LocalDate date = dateList.get(0);
-        date = date.minusDays(1);
         final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
+        LocalDate date = dateList.get(0);
+        date.minusDays(1);
         assertEquals(min.get(), date);
     }
 }

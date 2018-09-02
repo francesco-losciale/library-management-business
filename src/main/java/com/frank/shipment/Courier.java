@@ -18,7 +18,7 @@ public class Courier {
     public List<LocalDate> getPossibleDates(Order order) {
         // On the basis of the order data or some internal Courier states,
         // choose the best strategy to calculate the possible dates
-        PossibleDateCalculatorStrategy possibleDateCalculatorStrategy = new SimplePossibleDateCalculatorStrategy();
+        PossibleDateCalculatorStrategy possibleDateCalculatorStrategy = new RandomPossibleDateCalculatorStrategy();
         return possibleDateCalculatorStrategy.calculate();
     }
 
