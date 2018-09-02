@@ -2,6 +2,7 @@ package com.frank.shipment;
 
 import com.frank.book.Order;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ShippingRequest {
@@ -24,5 +25,12 @@ public class ShippingRequest {
 
     public void send() {
         this.shippingRequestState.sent();
+    }
+
+    public ShippingResponse accept() {
+        this.shippingRequestState.accept();
+        ShippingResponse shippingResponse = new ShippingResponse();
+        shippingResponse.setDeliveryFee(BigDecimal.ONE);
+        return shippingResponse;
     }
 }

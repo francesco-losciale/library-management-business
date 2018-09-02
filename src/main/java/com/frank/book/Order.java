@@ -16,6 +16,8 @@ public class Order {
 
     private BigDecimal booksPrice = BigDecimal.ZERO;
 
+    private BigDecimal deliveryFee = BigDecimal.ZERO;
+
     public void add(BookCollection bookCollection) {
         bookCollection.stream().forEach((book) -> {
             bookList.add(book);
@@ -26,6 +28,14 @@ public class Order {
 
     public BigDecimal getBooksPrice() {
         return booksPrice;
+    }
+
+    public BigDecimal getDeliveryFee() {
+        return deliveryFee;
+    }
+
+    public void setDeliveryFee(BigDecimal deliveryFee) {
+        this.deliveryFee = deliveryFee;
     }
 
     public void addAsContacted(Courier courier) {
@@ -39,5 +49,9 @@ public class Order {
 
     public List<Courier> getContactedCourierList() {
         return this.contactedCourierList;
+    }
+
+    public BigDecimal getTotalCost() {
+        return getDeliveryFee().add(getBooksPrice());
     }
 }
