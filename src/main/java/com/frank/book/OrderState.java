@@ -2,19 +2,19 @@ package com.frank.book;
 
 public class OrderState {
 
-    enum OrderStatus {
+    enum OrderStateEnum {
         INITIALIZED,
         RECEIVED_BY_THE_COURIER,
     }
 
-    private OrderStatus orderStatus = OrderStatus.INITIALIZED;
+    private OrderStateEnum orderStateEnum = OrderStateEnum.INITIALIZED;
 
     public void received() {
-        this.orderStatus = OrderStatus.RECEIVED_BY_THE_COURIER;
+        this.orderStateEnum = OrderStateEnum.RECEIVED_BY_THE_COURIER;
     }
 
     public boolean isReceived() {
-        return this.orderStatus == OrderStatus.RECEIVED_BY_THE_COURIER;
+        return this.orderStateEnum == OrderStateEnum.RECEIVED_BY_THE_COURIER;
     }
 
 }
