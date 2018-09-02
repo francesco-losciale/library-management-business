@@ -20,11 +20,11 @@ public class SimpleBestDateForShipmentStrategy implements BestDateForShipmentStr
 
     @Override
     public LocalDate calculate() {
-        List<LocalDate> allDates = new ArrayList<>();
+        List<LocalDate> dateList = new ArrayList<>();
         couriers.parallelStream().forEach((courier -> {
             courier.calculatePossibleDates(order);
-            allDates.addAll(courier.getCalculatedPossibleDates());
+            dateList.addAll(courier.getCalculatedPossibleDates());
         }));
-        return allDates.stream().min(LocalDate::compareTo).get();
+        return dateList.stream().min(LocalDate::compareTo).get();
     }
 }
