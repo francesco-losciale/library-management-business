@@ -10,7 +10,7 @@ public class Order {
 
     private OrderState orderState = new OrderState();
 
-    private Courier courierInCharge;
+    private List<Courier> contactedCourierList = new ArrayList<>();
 
     private List<Book> bookList = new ArrayList<>();
 
@@ -28,13 +28,16 @@ public class Order {
         return booksPrice;
     }
 
-    public void setAsReceived(Courier courier) {
+    public void addAsContacted(Courier courier) {
         this.orderState.received();
-        this.courierInCharge = courier;
+        this.contactedCourierList.add(courier);
     }
 
     public OrderState getOrderState() {
         return orderState;
     }
 
+    public List<Courier> getContactedCourierList() {
+        return this.contactedCourierList;
+    }
 }

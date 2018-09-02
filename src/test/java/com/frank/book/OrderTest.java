@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,7 @@ public class OrderTest {
         Courier courier = new Courier();
         courier.receive(order);
         assertTrue(order.getOrderState().isReceived());
+        assertTrue(order.getContactedCourierList().contains(courier));
     }
 
     @Test
@@ -67,6 +69,35 @@ public class OrderTest {
         Courier courier = new Courier();
         List<LocalDate> dateList = courier.getPossibleDates(order);
         LocalDate date = dateList.get(0);
+        final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
+        assertEquals(min.get(), date);
+    }
+
+
+    @Test
+    public void testContactTwoCourierSendingOrderInformation() {
+        Order order = new Order();
+        Courier firstCourier = new Courier();
+        Courier secondCourier = new Courier();
+        firstCourier.receive(order);
+        secondCourier.receive(order);
+        assertTrue(order.getOrderState().isReceived());
+        assertTrue(order.getContactedCourierList().contains(firstCourier));
+        assertTrue(order.getContactedCourierList().contains(secondCourier));
+    }
+
+    @Test
+    public void testReadWhatAreAllTheVacantDaysFromCouriersThenPickTheNearestOne() {
+        Order order = new Order();
+        Courier firstCourier = new Courier();
+        Courier secondCourier = new Courier();
+        List<LocalDate> firstCourierDateList = firstCourier.getPossibleDates(order);
+        List<LocalDate> secondCourierDateList = secondCourier.getPossibleDates(order);
+        List<LocalDate> dateList = new ArrayList<>();
+        dateList.addAll(firstCourierDateList);
+        dateList.addAll(secondCourierDateList);
+        LocalDate date = dateList.get(0);
+        date = date.minusDays(1);
         final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
         assertEquals(min.get(), date);
     }
