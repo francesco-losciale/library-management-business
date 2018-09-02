@@ -6,6 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -55,6 +58,16 @@ public class OrderTest {
         Order order = new Order();
         Courier courier = new Courier();
         courier.receive(order);
-        assertEquals(order.getOrderStatus(), Order.OrderStatus.RECEIVED_BY_THE_COURIER);
+        assertTrue(order.getOrderState().isReceived());
+    }
+
+    @Test
+    public void testReadWhatAreAllTheVacantDaysForACourierThenPickTheNearestOne() {
+        Order order = new Order();
+        Courier courier = new Courier();
+        List<LocalDate> dateList = courier.getPossibleDates(order);
+        LocalDate date = dateList.get(0);
+        final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
+        assertEquals(min.get(), date);
     }
 }
