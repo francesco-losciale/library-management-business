@@ -1,6 +1,8 @@
 package com.frank.book;
 
+import com.frank.shipment.BestDateForShipmentStrategy;
 import com.frank.shipment.Courier;
+import com.frank.shipment.SimpleBestDateForShipmentStrategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +69,8 @@ public class OrderTest {
     public void testReadWhatAreAllTheVacantDaysForACourierThenPickTheNearestOne() {
         Order order = new Order();
         Courier courier = new Courier();
-        List<LocalDate> dateList = courier.getPossibleDates(order);
+        courier.calculatePossibeDates(order);
+        List<LocalDate> dateList = courier.getCalculatedPossibleDates();
         LocalDate date = dateList.get(0);
         final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
         assertEquals(min.get(), date);
@@ -91,14 +94,14 @@ public class OrderTest {
         Order order = new Order();
         Courier firstCourier = new Courier();
         Courier secondCourier = new Courier();
-        List<LocalDate> firstCourierDateList = firstCourier.getPossibleDates(order);
-        List<LocalDate> secondCourierDateList = secondCourier.getPossibleDates(order);
+        BestDateForShipmentStrategy strategy = new SimpleBestDateForShipmentStrategy(order, firstCourier, secondCourier);
+        LocalDate bestDate = strategy.calculate();
+        List<LocalDate> firstCourierDateList = firstCourier.getCalculatedPossibleDates();
+        List<LocalDate> secondCourierDateList = secondCourier.getCalculatedPossibleDates();
         List<LocalDate> dateList = new ArrayList<>();
         dateList.addAll(firstCourierDateList);
         dateList.addAll(secondCourierDateList);
         final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
-        LocalDate date = dateList.get(0);
-        date.minusDays(1);
-        assertEquals(min.get(), date);
+        assertEquals(min.get(), bestDate);
     }
 }

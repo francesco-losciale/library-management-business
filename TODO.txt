@@ -1,5 +1,6 @@
 HEAD:
 Read what are the vacancies offered by all the couriers and pick the nearest by date
+Read what are the vacancies offered by all the couriers and pick the COURIER that offers the nearest by date
 Shipping request to the courier then getting confirm through ACK
 Shipping start advert received by the courier so add the cost to the Order
 Delete an order if not already shipped

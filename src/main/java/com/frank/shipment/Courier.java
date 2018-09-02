@@ -11,15 +11,21 @@ public class Courier {
 
     final private Queue<Order> orderQueue = new ConcurrentLinkedDeque<>();
 
+    private List<LocalDate> calculatedPossibleDates;
+
     public void receive(Order order) {
         order.addAsContacted(this);
     }
 
-    public List<LocalDate> getPossibleDates(Order order) {
+    public void calculatePossibeDates(Order order) {
         // On the basis of the order data or some internal Courier states,
         // choose the best strategy to calculate the possible dates
         PossibleDateCalculatorStrategy possibleDateCalculatorStrategy = new RandomPossibleDateCalculatorStrategy();
-        return possibleDateCalculatorStrategy.calculate();
+        this.calculatedPossibleDates = possibleDateCalculatorStrategy.calculate();
+    }
+
+    public List<LocalDate> getCalculatedPossibleDates() {
+        return calculatedPossibleDates;
     }
 
 }
