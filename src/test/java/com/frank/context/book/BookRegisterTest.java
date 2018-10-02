@@ -1,4 +1,4 @@
-package com.frank.book;
+package com.frank.context.book;
 
 import org.junit.After;
 import org.junit.Before;

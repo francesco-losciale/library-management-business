@@ -1,4 +1,4 @@
-package com.frank.book;
+package com.frank.context.book;
 
 class BookAvailability {
 

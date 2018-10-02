@@ -1,8 +1,8 @@
-package com.frank.shipment;
+package com.frank.context.shipment;
 
-import com.frank.book.Order;
-import com.frank.shipment.strategies.PossibleDateCalculatorStrategy;
-import com.frank.shipment.strategies.impl.RandomPossibleDateCalculatorStrategy;
+import com.frank.context.book.Order;
+import com.frank.context.shipment.strategies.PossibleDateCalculatorStrategy;
+import com.frank.context.shipment.strategies.impl.RandomPossibleDateCalculatorStrategy;
 
 import java.time.LocalDate;
 import java.util.List;

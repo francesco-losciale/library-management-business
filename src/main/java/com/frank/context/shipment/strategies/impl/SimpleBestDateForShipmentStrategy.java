@@ -1,8 +1,8 @@
-package com.frank.shipment.strategies.impl;
+package com.frank.context.shipment.strategies.impl;
 
-import com.frank.book.Order;
-import com.frank.shipment.Courier;
-import com.frank.shipment.strategies.BestDateForShipmentStrategy;
+import com.frank.context.book.Order;
+import com.frank.context.shipment.Courier;
+import com.frank.context.shipment.strategies.BestDateForShipmentStrategy;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

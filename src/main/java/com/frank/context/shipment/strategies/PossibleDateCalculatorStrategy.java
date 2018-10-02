@@ -1,4 +1,4 @@
-package com.frank.shipment.strategies;
+package com.frank.context.shipment.strategies;
 
 import java.time.LocalDate;
 import java.util.List;

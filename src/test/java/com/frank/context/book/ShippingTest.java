@@ -1,8 +1,8 @@
-package com.frank.book;
+package com.frank.context.book;
 
-import com.frank.shipment.Courier;
-import com.frank.shipment.ShippingRequest;
-import com.frank.shipment.ShippingResponse;
+import com.frank.context.shipment.Courier;
+import com.frank.context.shipment.ShippingRequest;
+import com.frank.context.shipment.ShippingResponse;
 import org.junit.Before;
 import org.junit.Test;
 

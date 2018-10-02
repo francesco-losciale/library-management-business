@@ -1,4 +1,4 @@
-package com.frank.shipment;
+package com.frank.context.shipment;
 
 public class ShippingRequestState {
 

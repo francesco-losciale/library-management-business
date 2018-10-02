@@ -1,12 +1,17 @@
-package com.frank.book;
+package com.frank.context.book;
 
-import com.frank.shipment.Courier;
+import com.frank.capabilities.Dehydrator;
+import com.frank.capabilities.Hydratable;
+import com.frank.capabilities.Hydrator;
+import com.frank.context.shipment.Courier;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class Order implements Hydratable {
+
+    private Object id;
 
     private OrderState orderState = new OrderState();
 
@@ -17,6 +22,14 @@ public class Order {
     private BigDecimal booksPrice = BigDecimal.ZERO;
 
     private BigDecimal deliveryFee = BigDecimal.ZERO;
+
+    public Order() {
+        this.id = "1"; // TODO generate
+    }
+
+    public Object getId() {
+        return id;
+    }
 
     public void add(BookCollection bookCollection) {
         bookCollection.stream().forEach((book) -> {
@@ -54,4 +67,20 @@ public class Order {
     public BigDecimal getTotalCost() {
         return getDeliveryFee().add(getBooksPrice());
     }
+
+    @Override
+    public void hydrate(Hydrator hydrator) {
+        hydrator.hydrate(this);
+    }
+
+    @Override
+    public void dehydrate(Dehydrator dehydrator) {
+        dehydrator.dehydrate(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return Order.class.cast(obj).getId().equals(this.getId());
+    }
+
 }

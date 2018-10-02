@@ -1,6 +1,6 @@
-package com.frank.shipment;
+package com.frank.context.shipment;
 
-import com.frank.book.Order;
+import com.frank.context.book.Order;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
