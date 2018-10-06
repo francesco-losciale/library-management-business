@@ -1,12 +1,8 @@
 package com.frank.context.book;
 
-import com.frank.capabilities.Dehydrator;
-import com.frank.capabilities.Hydratable;
-import com.frank.capabilities.Hydrator;
-
 import java.math.BigDecimal;
 
-public class Book implements Hydratable {
+public class Book {
 
     private String title;
     private String author;
@@ -58,13 +54,4 @@ public class Book implements Hydratable {
         this.actualPrice = actualPrice;
     }
 
-    @Override
-    public void hydrate(Hydrator hydrator) {
-        hydrator.hydrate(this);
-    }
-
-    @Override
-    public void dehydrate(Dehydrator dehydrator) {
-        dehydrator.dehydrate(this);
-    }
 }

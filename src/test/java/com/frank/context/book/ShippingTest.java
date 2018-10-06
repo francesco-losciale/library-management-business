@@ -67,6 +67,6 @@ public class ShippingTest {
         BigDecimal deliveryFee = shippingResponse.getDeliveryFee();
         order.setDeliveryFee(deliveryFee);
         assertEquals(order.getDeliveryFee(), deliveryFee);
-        assertEquals(order.getTotalCost(), order.getBooksPrice().add(order.getDeliveryFee()));
+        assertEquals(order.getTotalCost(), order.getPrice().add(order.getDeliveryFee()));
     }
 }

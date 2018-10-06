@@ -1,8 +1,6 @@
 package com.frank.context.book;
 
-import com.frank.capabilities.Dehydrator;
 import com.frank.capabilities.Hydratable;
-import com.frank.capabilities.Hydrator;
 import com.frank.context.shipment.Courier;
 
 import java.math.BigDecimal;
@@ -13,13 +11,13 @@ public class Order implements Hydratable {
 
     private Object id;
 
-    private OrderState orderState = new OrderState();
+    private OrderState state = new OrderState();
 
     private List<Courier> contactedCourierList = new ArrayList<>();
 
     private List<Book> bookList = new ArrayList<>();
 
-    private BigDecimal booksPrice = BigDecimal.ZERO;
+    private BigDecimal price = BigDecimal.ZERO;
 
     private BigDecimal deliveryFee = BigDecimal.ZERO;
 
@@ -34,13 +32,13 @@ public class Order implements Hydratable {
     public void add(BookCollection bookCollection) {
         bookCollection.stream().forEach((book) -> {
             bookList.add(book);
-            booksPrice = booksPrice.add(book.getActualPrice());
+            price = price.add(book.getActualPrice());
         });
         bookCollection.setOrdered(true);
     }
 
-    public BigDecimal getBooksPrice() {
-        return booksPrice;
+    public BigDecimal getPrice() {
+        return price;
     }
 
     public BigDecimal getDeliveryFee() {
@@ -52,12 +50,12 @@ public class Order implements Hydratable {
     }
 
     public void addAsContacted(Courier courier) {
-        this.orderState.received();
+        this.state.received();
         this.contactedCourierList.add(courier);
     }
 
-    public OrderState getOrderState() {
-        return orderState;
+    public OrderState getState() {
+        return state;
     }
 
     public List<Courier> getContactedCourierList() {
@@ -65,17 +63,7 @@ public class Order implements Hydratable {
     }
 
     public BigDecimal getTotalCost() {
-        return getDeliveryFee().add(getBooksPrice());
-    }
-
-    @Override
-    public void hydrate(Hydrator hydrator) {
-        hydrator.hydrate(this);
-    }
-
-    @Override
-    public void dehydrate(Dehydrator dehydrator) {
-        dehydrator.dehydrate(this);
+        return getDeliveryFee().add(getPrice());
     }
 
     @Override

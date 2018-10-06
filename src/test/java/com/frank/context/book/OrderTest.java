@@ -53,7 +53,7 @@ public class OrderTest {
         BookCollection bookCollection = new BookCollection(book1, book2, book3);
         Order order = new Order();
         order.add(bookCollection);
-        assertEquals(order.getBooksPrice().doubleValue(), book1.getActualPrice().add(book2.getActualPrice()).add(book3.getActualPrice()).doubleValue());
+        assertEquals(order.getPrice().doubleValue(), book1.getActualPrice().add(book2.getActualPrice()).add(book3.getActualPrice()).doubleValue());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class OrderTest {
         Order order = new Order();
         Courier courier = new Courier();
         courier.receive(order);
-        assertTrue(order.getOrderState().isReceived());
+        assertTrue(order.getState().isReceived());
         assertTrue(order.getContactedCourierList().contains(courier));
     }
 
@@ -84,7 +84,7 @@ public class OrderTest {
         Courier secondCourier = new Courier();
         firstCourier.receive(order);
         secondCourier.receive(order);
-        assertTrue(order.getOrderState().isReceived());
+        assertTrue(order.getState().isReceived());
         assertTrue(order.getContactedCourierList().contains(firstCourier));
         assertTrue(order.getContactedCourierList().contains(secondCourier));
     }
