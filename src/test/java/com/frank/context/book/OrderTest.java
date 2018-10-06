@@ -61,7 +61,7 @@ public class OrderTest {
         Order order = new Order();
         Courier courier = new Courier();
         courier.receive(order);
-        assertTrue(order.getState().isReceived());
+        assertEquals(order.getState(), OrderState.RECEIVED_BY_THE_COURIER);
         assertTrue(order.getContactedCourierList().contains(courier));
     }
 
@@ -84,7 +84,7 @@ public class OrderTest {
         Courier secondCourier = new Courier();
         firstCourier.receive(order);
         secondCourier.receive(order);
-        assertTrue(order.getState().isReceived());
+        assertEquals(order.getState(), OrderState.RECEIVED_BY_THE_COURIER);
         assertTrue(order.getContactedCourierList().contains(firstCourier));
         assertTrue(order.getContactedCourierList().contains(secondCourier));
     }
