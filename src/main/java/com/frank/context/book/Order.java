@@ -1,7 +1,6 @@
 package com.frank.context.book;
 
-import com.frank.capabilities.Hydratable;
-import com.frank.capabilities.Repository;
+import com.frank.capability.Hydratable;
 import com.frank.context.shipment.Courier;
 
 import java.math.BigDecimal;
@@ -65,11 +64,6 @@ public class Order implements Hydratable {
             return this.getOrderNumber().equals(((Order)object).getOrderNumber());
         }
         return false;
-    }
-
-    @Override
-    public Object save(Repository repository) {
-        return repository.add(this);
     }
 
     private String generateOrderNumber() {
