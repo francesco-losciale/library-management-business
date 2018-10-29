@@ -8,6 +8,7 @@ import com.frank.dto.DeliveryDetails;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class NearestDeliveryStrategy implements BestDeliveryStrategy {
@@ -23,14 +24,20 @@ public class NearestDeliveryStrategy implements BestDeliveryStrategy {
 
     @Override
     public DeliveryDetails calculate() {
-        Courier best = null;
-        for (Courier curier : this.curiers)
+        DeliveryDetails deliveryDetails = new DeliveryDetails();
+        if (this.couriers.size() > 0) {
+            Courier best = this.couriers.get(0);
+            for (Courier courier : this.couriers) {
+                if (getMinDateAmongList(courier.getAvailability()).isBefore(getMinDateAmongList(best.getAvailability()))) {
+                    best = courier;
+                }
+            }
+            deliveryDetails.setCourier(best);
+        }
+        return deliveryDetails;
+    }
 
-
-        List<LocalDate> dateList = new ArrayList<>();
-        couriers.parallelStream().forEach((courier -> {
-            dateList.addAll(courier.getAvailability());
-        }));
-        return dateList.stream().min(LocalDate::compareTo).get();
+    private LocalDate getMinDateAmongList(List<LocalDate> list) {
+        return list.stream().min(LocalDate::compareTo).get();
     }
 }
