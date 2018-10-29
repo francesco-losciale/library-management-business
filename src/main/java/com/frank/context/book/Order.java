@@ -2,6 +2,7 @@ package com.frank.context.book;
 
 import com.frank.capability.Hydratable;
 import com.frank.context.shipment.Courier;
+import com.frank.entity.Book;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Order implements Hydratable {
     private final List<Courier> contactedCourierList = new ArrayList<>();
     private final List<Book> bookList = new ArrayList<>();
 
+    private Courier courier;
     private OrderState state = OrderState.INITIALIZED;
     private BigDecimal price = BigDecimal.ZERO;
     private BigDecimal deliveryFee = BigDecimal.ZERO;
@@ -64,6 +66,14 @@ public class Order implements Hydratable {
             return this.getOrderNumber().equals(((Order)object).getOrderNumber());
         }
         return false;
+    }
+
+    public void setCourier(Courier courier) {
+        this.courier = courier;
+    }
+
+    public Courier getCourier() {
+        return courier;
     }
 
     private String generateOrderNumber() {

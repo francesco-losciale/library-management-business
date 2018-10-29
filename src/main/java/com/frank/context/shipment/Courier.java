@@ -13,21 +13,14 @@ public class Courier {
 
     final private Queue<Order> orderQueue = new ConcurrentLinkedDeque<>();
 
-    private List<LocalDate> calculatedPossibleDates;
+    private List<LocalDate> availability; // TODO populate this field someway
 
     public void receive(Order order) {
         order.addAsContacted(this);
     }
 
-    public void calculatePossibleDates(Order order) {
-        // On the basis of the order data or some internal Courier states,
-        // choose the best strategy to calculate the possible dates
-        PossibleDateCalculatorStrategy possibleDateCalculatorStrategy = new RandomPossibleDateCalculatorStrategy();
-        this.calculatedPossibleDates = possibleDateCalculatorStrategy.calculate();
-    }
-
-    public List<LocalDate> getCalculatedPossibleDates() {
-        return calculatedPossibleDates;
+    public List<LocalDate> getAvailability() {
+        return availability;
     }
 
 }

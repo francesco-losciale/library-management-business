@@ -3,6 +3,7 @@ package com.frank.context.book;
 import com.frank.context.shipment.Courier;
 import com.frank.context.shipment.ShippingRequest;
 import com.frank.context.shipment.ShippingResponse;
+import com.frank.entity.Book;
 import org.junit.Before;
 import org.junit.Test;
 

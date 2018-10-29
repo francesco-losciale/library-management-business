@@ -1,5 +1,9 @@
 package com.frank.context.book;
 
+import com.frank.entity.Book;
+import com.frank.entity.BookGenre;
+import com.frank.entity.BookShelf;
+import com.frank.usecase.ShelfUseCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +16,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 
-public class BookRegisterTest {
+public class BookTest {
 
     final BookRegister bookRegister = new BookRegister();
+    final ShelfUseCase shelfUseCase = new ShelfUseCase();
 
     @Before
     public void init() {
@@ -91,7 +96,7 @@ public class BookRegisterTest {
         Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
-        BookShelf bookShelf = new BookShelf(10);
+        BookShelf bookShelf = shelfUseCase.newShelf(10);
         bookShelf.place(bookCollection);
         List<Book> notFoundBookList = new ArrayList<>();
         bookCollection.stream().forEach(currentBook -> {
@@ -107,11 +112,11 @@ public class BookRegisterTest {
         Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
-        BookShelf bookShelfSrc = new BookShelf(1);
-        BookShelf bookShelfDest = new BookShelf(1);
-        bookShelfSrc.place(bookCollection);
-        bookShelfSrc.move(bookCollection, bookShelfDest);
-        assertTrue(bookShelfDest.contains(bookCollection));
+        BookShelf src = shelfUseCase.newShelf(1);
+        BookShelf dest = shelfUseCase.newShelf(1);
+        src.place(bookCollection);
+        shelfUseCase.moveCollectionFromShelfToShelf(bookCollection, src, dest);
+        assertTrue(dest.contains(bookCollection));
     }
 
     @Test
@@ -121,7 +126,7 @@ public class BookRegisterTest {
         Book book = bookRegister.get("isbn");
         BookCollection collection = new BookCollection();
         collection.add(book);
-        BookShelf thrillerShelf = new BookShelf(1, genre);
+        BookShelf thrillerShelf = shelfUseCase.newShelf(genre, 1);
         thrillerShelf.place(collection);
         assertTrue(collection.stream().allMatch((currentBook) -> currentBook.getGenre().equals(genre)));
     }

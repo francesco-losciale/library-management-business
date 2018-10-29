@@ -1,4 +1,4 @@
-package com.frank.context.book;
+package com.frank.entity;
 
 import java.math.BigDecimal;
 
@@ -9,6 +9,7 @@ public class Book {
     private String isbn;
     private BookGenre genre;
     private BigDecimal actualPrice;
+    private BookShelf shelf;
 
     public Object getId() {
         return getIsbn();
@@ -54,4 +55,11 @@ public class Book {
         this.actualPrice = actualPrice;
     }
 
+    public BookShelf getShelf() {
+        return shelf;
+    }
+
+    public void setShelf(BookShelf shelf) {
+        this.shelf = shelf;
+    }
 }

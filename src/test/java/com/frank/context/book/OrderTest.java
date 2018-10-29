@@ -2,23 +2,30 @@ package com.frank.context.book;
 
 import com.frank.context.shipment.*;
 import com.frank.context.shipment.strategies.BestCourierForShipmentStrategy;
-import com.frank.context.shipment.strategies.BestDateForShipmentStrategy;
+import com.frank.context.shipment.strategies.BestDeliveryStrategy;
+import com.frank.context.shipment.strategies.impl.RandomPossibleDateCalculatorStrategy;
 import com.frank.context.shipment.strategies.impl.SimpleBestCourierForShipmentStrategy;
-import com.frank.context.shipment.strategies.impl.SimpleBestDateForShipmentStrategy;
+import com.frank.context.shipment.strategies.impl.NearestDeliveryStrategy;
+import com.frank.entity.Book;
+import com.frank.usecase.OrderUseCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.mockito.Mockito.when;
 
 public class OrderTest {
 
     final BookRegister bookRegister = new BookRegister();
+    final OrderUseCase orderUseCase = new OrderUseCase();
 
     @Before
     public void init() {
@@ -40,8 +47,7 @@ public class OrderTest {
         Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
-        Order order = new Order();
-        order.add(bookCollection);
+        orderUseCase.newOrder(bookCollection);
         assertTrue(bookCollection.isOrdered());
     }
 
@@ -51,31 +57,24 @@ public class OrderTest {
         Book book2 = bookRegister.get("isbn");
         Book book3 = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection(book1, book2, book3);
-        Order order = new Order();
-        order.add(bookCollection);
-        assertEquals(order.getPrice().doubleValue(), book1.getActualPrice().add(book2.getActualPrice()).add(book3.getActualPrice()).doubleValue());
+        assertEquals(orderUseCase.newOrder(bookCollection).getPrice().doubleValue(),
+                book1.getActualPrice().add(book2.getActualPrice()).add(book3.getActualPrice()).doubleValue());
     }
 
     @Test
     public void testContactCourierSendingOrderInformation() {
-        Order order = new Order();
+        Order order = orderUseCase.newOrder(new BookCollection());
         Courier courier = new Courier();
-        courier.receive(order);
+        orderUseCase.sendOrderToCourier(order, courier);
         assertEquals(order.getState(), OrderState.RECEIVED_BY_THE_COURIER);
         assertTrue(order.getContactedCourierList().contains(courier));
     }
 
-    @Test
-    public void testReadWhatAreAllTheVacantDaysForACourierThenPickTheNearestOne() {
-        Order order = new Order();
+    @Test(expected = RuntimeException.class)
+    public void testOrderCheckFailsIfCourierIsNotAvailableForDelivery() {
         Courier courier = new Courier();
-        courier.calculatePossibleDates(order);
-        List<LocalDate> dateList = courier.getCalculatedPossibleDates();
-        LocalDate date = dateList.get(0);
-        final Optional<LocalDate> min = dateList.stream().min((o1, o2) -> o1.compareTo(o2));
-        assertEquals(min.get(), date);
+        orderUseCase.checkCourierDeliveryDate(courier, new RandomPossibleDateCalculatorStrategy());
     }
-
 
     @Test
     public void testContactTwoCourierSendingOrderInformation() {
@@ -92,17 +91,15 @@ public class OrderTest {
     @Test
     public void testReadWhatAreAllTheVacantDaysFromCouriersThenPickTheNearestOne() {
         Order order = new Order();
-        Courier firstCourier = new Courier();
-        Courier secondCourier = new Courier();
-        BestDateForShipmentStrategy strategy = new SimpleBestDateForShipmentStrategy(order, firstCourier, secondCourier);
-        LocalDate bestDate = strategy.calculate();
-        List<LocalDate> firstCourierDateList = firstCourier.getCalculatedPossibleDates();
-        List<LocalDate> secondCourierDateList = secondCourier.getCalculatedPossibleDates();
-        List<LocalDate> dateList = new ArrayList<>();
-        dateList.addAll(firstCourierDateList);
-        dateList.addAll(secondCourierDateList);
-        final Optional<LocalDate> min = dateList.stream().min(LocalDate::compareTo);
-        assertEquals(min.get(), bestDate);
+        Courier firstCourier = Mockito.mock(Courier.class);
+        when(firstCourier.getAvailability()).thenReturn(Arrays.asList(LocalDate.of(2018, Month.APRIL, 10)));
+        Courier secondCourier = Mockito.mock(Courier.class);
+        when(secondCourier.getAvailability()).thenReturn(Arrays.asList(LocalDate.of(2018, Month.APRIL, 9)));
+
+        BestDeliveryStrategy strategy = new NearestDeliveryStrategy(order, firstCourier, secondCourier);
+        orderUseCase.sendOrderToBestCourier(order, strategy, firstCourier, secondCourier);
+
+        assertTrue(order.getCourier().equals(secondCourier));
     }
 
     @Test
@@ -112,8 +109,8 @@ public class OrderTest {
         Courier secondCourier = new Courier();
         BestCourierForShipmentStrategy strategy = new SimpleBestCourierForShipmentStrategy(order, firstCourier, secondCourier);
         Courier calculatedCourier = strategy.calculate();
-        LocalDate firstCourierDate = firstCourier.getCalculatedPossibleDates().stream().min(LocalDate::compareTo).get();
-        LocalDate secondCourierDate = secondCourier.getCalculatedPossibleDates().stream().min(LocalDate::compareTo).get();
+        LocalDate firstCourierDate = firstCourier.getAvailability().stream().min(LocalDate::compareTo).get();
+        LocalDate secondCourierDate = secondCourier.getAvailability().stream().min(LocalDate::compareTo).get();
         Courier bestCourier = firstCourierDate.isBefore(secondCourierDate) ? firstCourier : secondCourier;
         assertEquals(bestCourier, calculatedCourier);
     }

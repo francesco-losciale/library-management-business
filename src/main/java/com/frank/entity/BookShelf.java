@@ -1,9 +1,11 @@
-package com.frank.context.book;
+package com.frank.entity;
+
+import com.frank.context.book.BookCollection;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class BookShelf {
+public class BookShelf {
 
     final private List<Book> bookInShelf;
 
@@ -29,6 +31,14 @@ class BookShelf {
         bookCollection.stream().forEach( book -> {
             bookInShelf.add(book);
             book.setGenre(this.genre);
+            book.setShelf(this);
+        });
+    }
+
+    public void remove(BookCollection bookCollection) {
+        bookCollection.stream().forEach((book) -> {
+            this.bookInShelf.remove(book.getId());
+            book.setShelf(null);
         });
     }
 
@@ -40,14 +50,4 @@ class BookShelf {
         return bookCollection.stream().allMatch((book) -> bookInShelf.contains(book) );
     }
 
-    public void move(BookCollection bookCollection, BookShelf bookShelfDest) {
-        bookCollection.stream().forEach((book) -> {
-            this.bookInShelf.remove(book.getId());
-            bookShelfDest.place(book);
-        });
-    }
-
-    private void place(Book book) {
-        this.bookInShelf.add(book);
-    }
 }

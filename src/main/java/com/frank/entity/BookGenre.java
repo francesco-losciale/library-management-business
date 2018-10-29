@@ -1,6 +1,6 @@
-package com.frank.context.book;
+package com.frank.entity;
 
-class BookGenre {
+public class BookGenre {
 
     private String name;
 
