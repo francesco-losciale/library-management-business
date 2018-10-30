@@ -1,10 +1,11 @@
 package com.frank.usecase;
 
-import com.frank.context.book.BookCollection;
-import com.frank.context.book.Order;
-import com.frank.context.shipment.Courier;
-import com.frank.context.shipment.strategies.BestDeliveryStrategy;
-import com.frank.context.shipment.strategies.PossibleDateCalculatorStrategy;
+import com.frank.entity.book.BookCollection;
+import com.frank.entity.order.Order;
+import com.frank.entity.courier.Courier;
+import com.frank.entity.courier.strategies.BestDeliveryStrategy;
+import com.frank.entity.courier.strategies.PossibleDateCalculatorStrategy;
+import com.frank.entity.courier.dto.ShipmentDetails;
 
 public class OrderUseCase {
 
@@ -14,19 +15,20 @@ public class OrderUseCase {
         return order;
     }
 
+    // TODO check that availableDate list is not empty
+
     public void sendOrderToCourier(Order order, Courier courier) {
         courier.receive(order);
     }
 
     public void checkCourierDeliveryDate(Courier courier, PossibleDateCalculatorStrategy possibleDateCalculatorStrategy) {
         if (!courier.getAvailability().contains(possibleDateCalculatorStrategy.calculate())) {
-            throw new RuntimeException("This courirer isn't available in the order dates");
+            throw new RuntimeException("This courier isn't available in the order dates");
         }
     }
 
     public void sendOrderToBestCourier(Order order, BestDeliveryStrategy strategy, Courier... couriers) {
-        throw new RuntimeException("Not implemented yet");
-        // Find the best courier
-        // order.setCourier(bestCourier)
+        ShipmentDetails shipmentDetails = strategy.calculate();
+        order.setCourier(shipmentDetails.getCourier());
     }
 }

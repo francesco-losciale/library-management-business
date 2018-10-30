@@ -1,8 +1,6 @@
-package com.frank.context.shipment;
+package com.frank.entity.courier;
 
-import com.frank.context.book.Order;
-import com.frank.context.shipment.strategies.PossibleDateCalculatorStrategy;
-import com.frank.context.shipment.strategies.impl.RandomPossibleDateCalculatorStrategy;
+import com.frank.entity.order.Order;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +14,7 @@ public class Courier {
     private List<LocalDate> availability; // TODO populate this field someway
 
     public void receive(Order order) {
-        order.addAsContacted(this);
+        order.setCourier(this);
     }
 
     public List<LocalDate> getAvailability() {

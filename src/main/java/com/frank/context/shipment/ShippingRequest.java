@@ -1,6 +1,7 @@
 package com.frank.context.shipment;
 
-import com.frank.context.book.Order;
+import com.frank.entity.courier.Courier;
+import com.frank.entity.order.Order;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

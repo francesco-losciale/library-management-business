@@ -1,17 +1,17 @@
-package com.frank.context.book;
-
-import com.frank.capability.Hydratable;
-import com.frank.context.shipment.Courier;
-import com.frank.entity.Book;
+package com.frank.entity.order;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.frank.entity.Hydratable;
+import com.frank.entity.book.Book;
+import com.frank.entity.book.BookCollection;
+import com.frank.entity.courier.Courier;
+
 public class Order implements Hydratable {
 
     private final String orderNumber = generateOrderNumber();
-    private final List<Courier> contactedCourierList = new ArrayList<>();
     private final List<Book> bookList = new ArrayList<>();
 
     private Courier courier;
@@ -31,10 +31,6 @@ public class Order implements Hydratable {
         return state;
     }
 
-    public List<Courier> getContactedCourierList() {
-        return this.contactedCourierList;
-    }
-
     public BigDecimal getTotalCost() {
         return getDeliveryFee().add(getPrice());
     }
@@ -51,13 +47,17 @@ public class Order implements Hydratable {
         bookCollection.setOrdered(true);
     }
 
-    public void addAsContacted(Courier courier) {
-        this.state = OrderState.RECEIVED_BY_THE_COURIER;
-        this.contactedCourierList.add(courier);
-    }
-
     public void setDeliveryFee(BigDecimal deliveryFee) {
         this.deliveryFee = deliveryFee;
+    }
+
+    public void setCourier(Courier courier) {
+        this.state = OrderState.RECEIVED_BY_THE_COURIER;
+        this.courier = courier;
+    }
+
+    public Courier getCourier() {
+        return courier;
     }
 
     @Override
@@ -66,14 +66,6 @@ public class Order implements Hydratable {
             return this.getOrderNumber().equals(((Order)object).getOrderNumber());
         }
         return false;
-    }
-
-    public void setCourier(Courier courier) {
-        this.courier = courier;
-    }
-
-    public Courier getCourier() {
-        return courier;
     }
 
     private String generateOrderNumber() {

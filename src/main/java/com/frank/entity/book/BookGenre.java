@@ -1,4 +1,4 @@
-package com.frank.entity;
+package com.frank.entity.book;
 
 public class BookGenre {
 

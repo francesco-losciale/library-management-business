@@ -1,9 +1,13 @@
 package com.frank.context.book;
 
-import com.frank.context.shipment.Courier;
+import com.frank.entity.courier.Courier;
 import com.frank.context.shipment.ShippingRequest;
 import com.frank.context.shipment.ShippingResponse;
-import com.frank.entity.Book;
+import com.frank.entity.book.Book;
+import com.frank.entity.book.BookCollection;
+import com.frank.entity.book.BookRegister;
+import com.frank.entity.order.Order;
+
 import org.junit.Before;
 import org.junit.Test;
 

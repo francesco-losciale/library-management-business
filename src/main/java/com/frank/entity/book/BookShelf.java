@@ -1,6 +1,4 @@
-package com.frank.entity;
-
-import com.frank.context.book.BookCollection;
+package com.frank.entity.book;
 
 import java.util.ArrayList;
 import java.util.List;

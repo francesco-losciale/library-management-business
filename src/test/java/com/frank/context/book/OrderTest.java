@@ -1,12 +1,14 @@
 package com.frank.context.book;
 
-import com.frank.context.shipment.*;
-import com.frank.context.shipment.strategies.BestCourierForShipmentStrategy;
-import com.frank.context.shipment.strategies.BestDeliveryStrategy;
-import com.frank.context.shipment.strategies.impl.RandomPossibleDateCalculatorStrategy;
-import com.frank.context.shipment.strategies.impl.SimpleBestCourierForShipmentStrategy;
-import com.frank.context.shipment.strategies.impl.NearestDeliveryStrategy;
-import com.frank.entity.Book;
+import com.frank.entity.courier.strategies.BestDeliveryStrategy;
+import com.frank.entity.courier.strategies.impl.RandomPossibleDateCalculatorStrategy;
+import com.frank.entity.courier.strategies.impl.NearestDeliveryStrategy;
+import com.frank.entity.book.Book;
+import com.frank.entity.book.BookCollection;
+import com.frank.entity.book.BookRegister;
+import com.frank.entity.courier.Courier;
+import com.frank.entity.order.Order;
+import com.frank.entity.order.OrderState;
 import com.frank.usecase.OrderUseCase;
 import org.junit.After;
 import org.junit.Before;
@@ -67,7 +69,7 @@ public class OrderTest {
         Courier courier = new Courier();
         orderUseCase.sendOrderToCourier(order, courier);
         assertEquals(order.getState(), OrderState.RECEIVED_BY_THE_COURIER);
-        assertTrue(order.getContactedCourierList().contains(courier));
+        assertTrue(order.getCourier().equals(courier));
     }
 
     @Test(expected = RuntimeException.class)
@@ -77,42 +79,15 @@ public class OrderTest {
     }
 
     @Test
-    public void testContactTwoCourierSendingOrderInformation() {
-        Order order = new Order();
-        Courier firstCourier = new Courier();
-        Courier secondCourier = new Courier();
-        firstCourier.receive(order);
-        secondCourier.receive(order);
-        assertEquals(order.getState(), OrderState.RECEIVED_BY_THE_COURIER);
-        assertTrue(order.getContactedCourierList().contains(firstCourier));
-        assertTrue(order.getContactedCourierList().contains(secondCourier));
-    }
-
-    @Test
     public void testReadWhatAreAllTheVacantDaysFromCouriersThenPickTheNearestOne() {
         Order order = new Order();
         Courier firstCourier = Mockito.mock(Courier.class);
         when(firstCourier.getAvailability()).thenReturn(Arrays.asList(LocalDate.of(2018, Month.APRIL, 10)));
         Courier secondCourier = Mockito.mock(Courier.class);
         when(secondCourier.getAvailability()).thenReturn(Arrays.asList(LocalDate.of(2018, Month.APRIL, 9)));
-
         BestDeliveryStrategy strategy = new NearestDeliveryStrategy(order, firstCourier, secondCourier);
         orderUseCase.sendOrderToBestCourier(order, strategy, firstCourier, secondCourier);
-
         assertTrue(order.getCourier().equals(secondCourier));
-    }
-
-    @Test
-    public void testReadWhatAreAllTheVacantDaysFromCouriersThenPickTheCourierThatOffersTheNearestOne() {
-        Order order = new Order();
-        Courier firstCourier = new Courier();
-        Courier secondCourier = new Courier();
-        BestCourierForShipmentStrategy strategy = new SimpleBestCourierForShipmentStrategy(order, firstCourier, secondCourier);
-        Courier calculatedCourier = strategy.calculate();
-        LocalDate firstCourierDate = firstCourier.getAvailability().stream().min(LocalDate::compareTo).get();
-        LocalDate secondCourierDate = secondCourier.getAvailability().stream().min(LocalDate::compareTo).get();
-        Courier bestCourier = firstCourierDate.isBefore(secondCourierDate) ? firstCourier : secondCourier;
-        assertEquals(bestCourier, calculatedCourier);
     }
 
 }

@@ -1,8 +1,10 @@
 package com.frank.context.book;
 
-import com.frank.entity.Book;
-import com.frank.entity.BookGenre;
-import com.frank.entity.BookShelf;
+import com.frank.entity.book.Book;
+import com.frank.entity.book.BookCollection;
+import com.frank.entity.book.BookGenre;
+import com.frank.entity.book.BookRegister;
+import com.frank.entity.book.BookShelf;
 import com.frank.usecase.ShelfUseCase;
 import org.junit.After;
 import org.junit.Before;

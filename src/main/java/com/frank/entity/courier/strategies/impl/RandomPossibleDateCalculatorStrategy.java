@@ -1,6 +1,6 @@
-package com.frank.context.shipment.strategies.impl;
+package com.frank.entity.courier.strategies.impl;
 
-import com.frank.context.shipment.strategies.PossibleDateCalculatorStrategy;
+import com.frank.entity.courier.strategies.PossibleDateCalculatorStrategy;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

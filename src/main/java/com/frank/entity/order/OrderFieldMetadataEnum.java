@@ -1,4 +1,4 @@
-package com.frank.metadata;
+package com.frank.entity.order;
 
 public enum OrderFieldMetadataEnum {
 

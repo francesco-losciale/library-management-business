@@ -1,6 +1,4 @@
-package com.frank.context.book;
-
-import com.frank.entity.Book;
+package com.frank.entity.book;
 
 import java.util.HashMap;
 import java.util.Map;

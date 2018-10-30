@@ -1,6 +1,4 @@
-package com.frank.context.book;
-
-import com.frank.entity.Book;
+package com.frank.entity.book;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +12,6 @@ public class BookCollection {
     private boolean ordered;
 
     public BookCollection(){
-
     }
 
     public BookCollection(Book... collection){
