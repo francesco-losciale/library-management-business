@@ -49,8 +49,8 @@ public class OrderTest {
         Book book = bookRegister.get("isbn");
         BookCollection bookCollection = new BookCollection();
         bookCollection.add(book);
-        orderUseCase.newOrder(bookCollection);
-        assertTrue(bookCollection.isOrdered());
+        Order order = orderUseCase.newOrder(bookCollection);
+        assertTrue(order.getBookList().contains(book));
     }
 
     @Test

@@ -8,6 +8,7 @@ import com.frank.entity.Hydratable;
 import com.frank.entity.book.Book;
 import com.frank.entity.book.BookCollection;
 import com.frank.entity.courier.Courier;
+import com.frank.entity.courier.dto.ShipmentDetails;
 
 public class Order implements Hydratable {
 
@@ -44,11 +45,6 @@ public class Order implements Hydratable {
             bookList.add(book);
             price = price.add(book.getActualPrice());
         });
-        bookCollection.setOrdered(true);
-    }
-
-    public void setDeliveryFee(BigDecimal deliveryFee) {
-        this.deliveryFee = deliveryFee;
     }
 
     public void setCourier(Courier courier) {
@@ -58,6 +54,15 @@ public class Order implements Hydratable {
 
     public Courier getCourier() {
         return courier;
+    }
+
+    public void deliver(ShipmentDetails shipmentDetails) {
+        this.deliveryFee = shipmentDetails.getDeliveryFee();
+        this.state = OrderState.SENT_DELIVERY;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
     }
 
     @Override

@@ -57,11 +57,4 @@ public class BookCollection {
         return null;
     }
 
-    public boolean isOrdered() {
-        return ordered;
-    }
-
-    public void setOrdered(boolean ordered) {
-        this.ordered = ordered;
-    }
 }
