@@ -1,20 +1,13 @@
-# Simple TDD session POF (work in progress)
 
-TDD applied for business object classes development (ie. bookshop study case).
-
-
-## Getting Started
-
-git clone https://github.com/francesco-losciale/library-management-business.git
-
-cd library-management-business
-
-mvn install
+# Tiny project for POC, experiments etc
 
 
-## Running the tests (unit test only)
 
-mvn test
+## Change 1 - Env set up and initial commit
+
+Added domain classes filled with simple logic to order books and assign them to a courier for delivering.
+
+TDD using JUnit4, Mockito, Maven
 
 
 ## License
