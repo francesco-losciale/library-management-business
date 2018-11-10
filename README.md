@@ -1,6 +1,9 @@
 
 # Tiny project for POC, experiments etc
 
+
+
+
 ## Latest change
 
 Starting point: simple generic domain classes with unit tests attached all together written in Java 8 (master branch).
@@ -14,6 +17,10 @@ Code changes necessary for passing the tests:
 3. Some infix calls are not possible anymore because of the non-nullable variables (look for "Point 3" in the codebase)
 4. Using static methods defined as companion objects requires the @JvmStatic annotation (look for "Point 4" in the codebase)
 
+
+## Change 2 - Persisting domain classes
+
+[Basic solution for persisting domain objects](https://github.com/francesco-losciale/library-management-persistence)
 
 
 ## Change 1 - Env set up and initial commit
