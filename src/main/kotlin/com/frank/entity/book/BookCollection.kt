@@ -46,7 +46,8 @@ class BookCollection {
 
     companion object {
 
-        fun seek(book: Book, vararg collections: BookCollection): Book {
+        // TODO 1: if you don't put this annotation, from java context this method will not be found as static.
+        @JvmStatic fun seek(book: Book, vararg collections: BookCollection): Book {
             for (bookCollection in collections) {
                 if (bookCollection.seek(book) != null) {
                     return bookCollection.seek(book)

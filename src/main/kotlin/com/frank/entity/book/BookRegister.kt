@@ -36,7 +36,9 @@ class BookRegister {
     }
 
     fun isBookAvailable(item: Book): Boolean {
-//        can't use the operator while accessing nullable fields...
+//        TODO 2 can't use the operator while accessing nullable fields...
+//        Infix call corresponds to a dot-qualified call 'this.availability[item]?.availability.compareTo(0)'
+//          which is not allowed on a nullable receiver 'this.availability[item]?.availability'. Use '?.'-qualified call instead
 //        return this.availability[item]?.availability > 0
         return this.availability[item]?.availability?.compareTo(0) != 0
     }

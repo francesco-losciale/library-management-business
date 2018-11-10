@@ -1,4 +1,4 @@
-package com.frank.context.book;
+package com.frank.test.book;
 
 import com.frank.entity.courier.strategies.BestDeliveryStrategy;
 import com.frank.entity.courier.strategies.impl.RandomPossibleDateCalculatorStrategy;
@@ -80,6 +80,14 @@ public class OrderTest {
 
     @Test
     public void testReadWhatAreAllTheVacantDaysFromCouriersThenPickTheNearestOne() {
+//      TODO 3
+//       org.mockito.exceptions.base.MockitoException:
+//        Cannot mock/spy class com.frank.entity.courier.Courier
+//        Mockito cannot mock/spy following:
+//        - final classes
+//        - anonymous classes
+//                - primitive types
+//        at OrderTest.testReadWhatAreAllTheVacantDaysFromCouriersThenPickTheNearestOne(OrderTest.java:84)
         Order order = new Order();
         Courier firstCourier = Mockito.mock(Courier.class);
         when(firstCourier.getAvailability()).thenReturn(Arrays.asList(LocalDate.of(2018, Month.APRIL, 10)));

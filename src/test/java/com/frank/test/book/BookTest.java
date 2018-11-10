@@ -1,4 +1,4 @@
-package com.frank.context.book;
+package com.frank.test.book;
 
 import com.frank.entity.book.Book;
 import com.frank.entity.book.BookCollection;
