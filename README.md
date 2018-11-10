@@ -3,9 +3,9 @@
 
 ## Latest change
 
-Starting point: simple generic domain classes with unit tests attached all written in Java 8.
+Starting point: simple generic domain classes with unit tests attached all together written in Java 8 (master branch).
 
-Moved the domain classes only from Java to Kotlin, keeping the unit tests in Java 8. 
+Moved the domain classes only from Java to Kotlin, keeping the unit tests in Java 8 (porting-kt branch). 
 
 Code changes necessary for passing the tests:
 
