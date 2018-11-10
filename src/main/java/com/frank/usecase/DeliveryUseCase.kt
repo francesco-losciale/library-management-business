@@ -9,14 +9,14 @@
  * program(s) have been supplied.
  *******************************************************************************
  *----------------------------------------------------------------------------*/
-package com.frank.usecase;
+package com.frank.usecase
 
-import com.frank.entity.courier.dto.ShipmentDetails;
-import com.frank.entity.order.Order;
+import com.frank.entity.courier.dto.ShipmentDetails
+import com.frank.entity.order.Order
 
-public class DeliveryUseCase {
+class DeliveryUseCase {
 
-    public void send(ShipmentDetails shipmentDetails, Order order) {
-        order.deliver(shipmentDetails);
+    fun send(shipmentDetails: ShipmentDetails, order: Order) {
+        order.deliver(shipmentDetails)
     }
 }

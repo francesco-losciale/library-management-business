@@ -1,6 +1,6 @@
-package com.frank.entity.order;
+package com.frank.entity.order
 
-public enum OrderState {
+enum class OrderState {
 
     INITIALIZED,
     RECEIVED_BY_THE_COURIER,
