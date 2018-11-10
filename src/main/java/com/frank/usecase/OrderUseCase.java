@@ -22,8 +22,8 @@ public class OrderUseCase {
     }
 
     public void checkCourierDeliveryDate(Courier courier, PossibleDateCalculatorStrategy possibleDateCalculatorStrategy) {
-        if (!courier.getAvailability().contains(possibleDateCalculatorStrategy.calculate())) {
-            throw new RuntimeException("This courier isn't available in the order dates");
+        if (!courier.getAvailability().containsAll(possibleDateCalculatorStrategy.calculate())) {
+            throw new RuntimeException("This courier isn't available during the period provided");
         }
     }
 
