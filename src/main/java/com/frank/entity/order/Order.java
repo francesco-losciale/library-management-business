@@ -41,7 +41,7 @@ public class Order implements Hydratable {
     }
 
     public void add(BookCollection bookCollection) {
-        bookCollection.stream().forEach((book) -> {
+        bookCollection.asList().forEach((book) -> {
             bookList.add(book);
             price = price.add(book.getActualPrice());
         });
