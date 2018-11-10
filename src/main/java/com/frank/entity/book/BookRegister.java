@@ -15,7 +15,7 @@ public class BookRegister {
     }
 
     public void add(Book item) {
-        availability.put(item, BookAvailability.ONE);
+        availability.put(item, BookAvailability.Companion.getONE());
         register(item);
     }
 
@@ -24,14 +24,14 @@ public class BookRegister {
     }
 
     public void setBookAsOutOfOrder(Book item) {
-        this.availability.put(item, BookAvailability.ZERO);
+        this.availability.put(item, BookAvailability.Companion.getZERO());
     }
 
     public void setBookAvailable(Book item) {
         if (this.availability.containsKey(item)) {
             this.availability.get(item).increase();
         } else {
-            this.availability.put(item, BookAvailability.ONE);
+            this.availability.put(item, BookAvailability.Companion.getONE());
         }
     }
 
