@@ -61,6 +61,12 @@ public class BookTest {
         bookCollection.seek(book);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void testSeekBookNotInCollections() {
+        Book book = bookRegister.get("isbn");
+        BookCollection bookCollection1 = new BookCollection();
+        BookCollection.seek(book, bookCollection1);
+    }
 
     @Test
     public void testSeekBookInCollections() {

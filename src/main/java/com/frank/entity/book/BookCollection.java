@@ -48,7 +48,7 @@ public class BookCollection {
                 return bookCollection.seek(book);
             }
         }
-        return null;
+        throw new RuntimeException("Book not found");
     }
 
     public List<Book> asList() {
