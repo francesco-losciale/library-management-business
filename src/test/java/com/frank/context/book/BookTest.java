@@ -54,6 +54,14 @@ public class BookTest {
         assertEquals(result, book);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void testSeekBookNotInCollection() {
+        Book book = bookRegister.get("isbn");
+        BookCollection bookCollection = new BookCollection();
+        bookCollection.seek(book);
+    }
+
+
     @Test
     public void testSeekBookInCollections() {
         Book book = bookRegister.get("isbn");
@@ -101,7 +109,7 @@ public class BookTest {
         BookShelf bookShelf = shelfUseCase.newShelf(10);
         bookShelf.place(bookCollection);
         List<Book> notFoundBookList = new ArrayList<>();
-        bookCollection.stream().forEach(currentBook -> {
+        bookCollection.asList().forEach(currentBook -> {
             if (!bookShelf.contains(currentBook)) {
                 notFoundBookList.add(currentBook);
             }
@@ -130,6 +138,6 @@ public class BookTest {
         collection.add(book);
         BookShelf thrillerShelf = shelfUseCase.newShelf(genre, 1);
         thrillerShelf.place(collection);
-        assertTrue(collection.stream().allMatch((currentBook) -> currentBook.getGenre().equals(genre)));
+        assertTrue(collection.asList().stream().allMatch((currentBook) -> currentBook.getGenre().equals(genre)));
     }
 }

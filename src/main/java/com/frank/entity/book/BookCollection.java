@@ -9,8 +9,6 @@ public class BookCollection {
 
     private List<Book> collection = new ArrayList<Book>();
 
-    private boolean ordered;
-
     public BookCollection(){
     }
 
@@ -26,17 +24,13 @@ public class BookCollection {
         return collection.contains(book);
     }
 
-    public Stream<Book> stream() {
-        return collection.stream();
-    }
-
     public Book seek(Book book) {
         for (Book currentBook : collection) {
             if (currentBook.equals(book)) {
                 return book;
             }
         }
-        return null;
+        throw new RuntimeException("Book not found");
     }
 
     public void move(Book book, BookCollection bookCollection) {
@@ -57,4 +51,7 @@ public class BookCollection {
         return null;
     }
 
+    public List<Book> asList() {
+        return new ArrayList<>(collection);
+    }
 }
