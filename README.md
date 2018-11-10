@@ -18,7 +18,7 @@ Code changes necessary for passing the tests:
 4. Using static methods defined as companion objects requires the @JvmStatic annotation (look for "Point 4" in the codebase)
 
 
-## Change 2 - Persisting domain classes
+## Change 2 - Simple persistence unit for domain classes
 
 [Basic solution for persisting domain objects](https://github.com/francesco-losciale/library-management-persistence)
 
