@@ -80,7 +80,7 @@ public class OrderTest {
 
     @Test
     public void testReadWhatAreAllTheVacantDaysFromCouriersThenPickTheNearestOne() {
-//      TODO 3
+//      Point 2: fixed using resources/org.mockito.plugins.MockMaker
 //       org.mockito.exceptions.base.MockitoException:
 //        Cannot mock/spy class com.frank.entity.courier.Courier
 //        Mockito cannot mock/spy following:

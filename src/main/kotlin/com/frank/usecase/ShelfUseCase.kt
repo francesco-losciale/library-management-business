@@ -12,7 +12,7 @@ class ShelfUseCase {
     }
 
     fun newShelf(placesCount: Int): BookShelf {
-        // TODO 4  not nullable anymore
+        // Point 1: not nullable anymore
 //        return newShelf(null, placesCount)
         return newShelf(BookGenre(), placesCount)
     }
