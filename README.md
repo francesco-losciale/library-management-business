@@ -6,6 +6,36 @@
 
 ## Latest change
 
+Added Gradle script, you can find something more elaborated [here](https://github.com/francesco-losciale/library-management-persistence/blob/master/build.gradle).
+
+```
+osboxes@osboxes:~/IdeaProjects/library-management-business$ mvn clean test
+...
+
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: **9.677 s**
+[INFO] Finished at: 2018-11-18T00:29:16Z
+[INFO] Final Memory: 16M/166M
+[INFO] ------------------------------------------------------------------------
+
+```
+
+```
+osboxes@osboxes:~/IdeaProjects/library-management-business$ gradle clean test
+...
+BUILD SUCCESSFUL
+
+Total time: **4.823 secs**
+
+```
+
+
+## Change 3 - New branch: porting from Java to Kotlin
+
 Starting point: simple generic domain classes with unit tests attached all together written in Java 8 (master branch).
 
 Moved the domain classes only from Java to Kotlin, keeping the unit tests in Java 8 (porting-kt branch). 
