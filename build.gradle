@@ -1,0 +1,21 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation (
+            ['junit:junit:4.12'],
+            ['org.mockito:mockito-all:1.9.5'],
+    )
+}
+
+compileJava.options.fork = true
+compileJava.options.forkOptions.executable = '/usr/lib/jvm/java-8-oracle/bin/javac'
+
+test {
+    afterTest { desc, result ->
+        logger.quiet "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
