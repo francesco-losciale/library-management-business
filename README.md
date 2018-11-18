@@ -17,7 +17,9 @@ Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: `**9.677 s**`
+```
+`[INFO] Total time: `**9.677 s**
+```
 [INFO] Finished at: 2018-11-18T00:29:16Z
 [INFO] Final Memory: 16M/166M
 [INFO] ------------------------------------------------------------------------
@@ -29,8 +31,9 @@ osboxes@osboxes:~/IdeaProjects/library-management-business$ gradle clean test
 ...
 BUILD SUCCESSFUL
 
-Total time: `**4.823 secs**`
-
+```
+`Total time: `**4.823 secs**
+```
 ```
 
 
